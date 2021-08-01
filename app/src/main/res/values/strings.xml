@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">DoYouKnow</string>
+    <string name="font2">MontserratAlternates-Regular.ttf</string>
+    <string name="favorite">Избранное</string>
+    <string name="cosmo">Космос</string>
+    <string name="planet">Планеты</string>
+    <string name="stars">Звёзды</string>
+    <string name="travel">Путешествия</string>
+    <string name="universal">Вселенная</string>
+    <string name="words">Цитаты</string>
+    <string name="smart">Умные фразы</string>
+    <string name="philosof">Фразы философов</string>
+    <string name="umor">Смешные фразы</string>
+    <string name="plants">Растения</string>
+    <string name="cure">Лечебные</string>
+    <string name="awesome">Удивительные</string>
+    <string name="danger">Опасные</string>
+    <string name="unusual">Необычное</string>
+    <string name="ufo">НЛО</string>
+    <string name="spirits">Привидения</string>
+</resources>

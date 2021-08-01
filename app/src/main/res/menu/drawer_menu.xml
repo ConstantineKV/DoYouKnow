@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <item  android:title="@string/favorite" android:id="@+id/id_favorite" />
+    <item android:title="@string/cosmo">
+        <menu>
+            <item android:title="@string/planet" android:id="@+id/id_planet"/>
+            <item android:title="@string/stars" android:id="@+id/id_stars"/>
+            <item android:title="@string/travel" android:id="@+id/id_travel"/>
+            <item android:title="@string/universal" android:id="@+id/id_universal"/>
+        </menu>
+    </item>
+    <item android:title="@string/words">
+        <menu>
+            <item android:title="@string/smart" android:id="@+id/id_smart"/>
+            <item android:title="@string/philosof" android:id="@+id/id_philosof"/>
+            <item android:title="@string/umor" android:id="@+id/id_umor"/>
+        </menu>
+    </item>
+    <item android:title="@string/plants">
+        <menu>
+            <item android:title="@string/cure" android:id="@+id/id_cure"/>
+            <item android:title="@string/danger" android:id="@+id/id_danger"/>
+            <item android:title="@string/awesome" android:id="@+id/id_awesome"/>
+        </menu>
+    </item>
+    <item android:title="@string/unusual">
+        <menu>
+            <item android:title="@string/ufo" android:id="@+id/id_ufo"/>
+            <item android:title="@string/spirits" android:id="@+id/id_spirits"/>
+        </menu>
+    </item>
+
+</menu>
