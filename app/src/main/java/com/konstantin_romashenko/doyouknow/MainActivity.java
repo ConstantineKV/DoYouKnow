@@ -26,7 +26,14 @@ public class MainActivity extends AppCompatActivity implements iNavItemSelectedL
     private RecyclerView rcView;
     private String category = "";
     public SharedPreferences pref;
-
+    private final String PLANETS = "planets";
+    private final String STARS = "stars";
+    private final String TRAVELS = "travels";
+    private final String UNIVERSAL = "universal";
+    private final String SMART = "smart";
+    private final String UMOR = "umor";
+    private final String UFO = "UFO";
+    private final String SPIRITS = "spirits";
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -57,39 +64,76 @@ public class MainActivity extends AppCompatActivity implements iNavItemSelectedL
         switch(item.getItemId())
         {
             case R.id.id_favorite:
+                updateFav();
 
                 break;
             case R.id.id_planet:
-                updateMainList(getResources().getStringArray(R.array.planets_arr), "planets");
+                updateMainList(getResources().getStringArray(R.array.planets_arr), PLANETS);
+
                 break;
             case R.id.id_travel:
-                updateMainList(getResources().getStringArray(R.array.travels_arr), "travel");
+                updateMainList(getResources().getStringArray(R.array.travels_arr), TRAVELS);
                 break;
             case R.id.id_universal:
-                updateMainList(getResources().getStringArray(R.array.universe_arr), "universal");
+                updateMainList(getResources().getStringArray(R.array.universe_arr), UNIVERSAL);
                 break;
             case R.id.id_stars:
-                updateMainList(getResources().getStringArray(R.array.stars_arr), "stars");
+                updateMainList(getResources().getStringArray(R.array.stars_arr), STARS);
                 break;
             case R.id.id_smart:
-                updateMainList(getResources().getStringArray(R.array.smart_words), "smart");
+                updateMainList(getResources().getStringArray(R.array.smart_words), SMART);
                 break;
             case R.id.id_umor:
-                updateMainList(getResources().getStringArray(R.array.Funny_words), "umor");
+                updateMainList(getResources().getStringArray(R.array.Funny_words), UMOR);
                 break;
             case R.id.id_ufo:
-                updateMainList(getResources().getStringArray(R.array.UFO_arr), "UFO");
+                updateMainList(getResources().getStringArray(R.array.UFO_arr), UFO);
                 break;
             case R.id.id_spirits:
-                updateMainList(getResources().getStringArray(R.array.spirits_arr), "spirits");
+                updateMainList(getResources().getStringArray(R.array.spirits_arr), SPIRITS);
                 break;
 
         }
     }
 
+    private void updateFav()
+    {
+        category = "none";
+        List<ListItem> listFav = new ArrayList<>();
+        List<String[]> listData = new ArrayList<>();
+        listData.add(getResources().getStringArray(R.array.planets_arr));
+        listData.add(getResources().getStringArray(R.array.travels_arr));
+        listData.add(getResources().getStringArray(R.array.universe_arr));
+        listData.add(getResources().getStringArray(R.array.stars_arr));
+        listData.add(getResources().getStringArray(R.array.smart_words));
+        listData.add(getResources().getStringArray(R.array.Funny_words));
+        listData.add(getResources().getStringArray(R.array.UFO_arr));
+        listData.add(getResources().getStringArray(R.array.spirits_arr));
+        String[] cat_array = {PLANETS, TRAVELS, UNIVERSAL, STARS, SMART, UMOR, UFO, SPIRITS};
+
+        for(int i = 0; i < listData.size(); i++)
+        {
+            for(int p = 0; p < listData.get(i).length; p++)
+            {
+                String d = pref.getString(cat_array[i],"none");
+                if ((d != null) && (d != "none"))
+                    if(d.charAt(p) == '1')
+                    {
+                        ListItem item = new ListItem();
+                        item.setText(listData.get(i)[p]);
+                        item.setPosition(p);
+                        item.setCat(cat_array[i]);
+                        listFav.add(item);
+                    }
+            }
+        }
+        adapter.updateList(listFav);
+    }
+
     private void updateMainList(String[] array, String category)
     {
         StringBuilder stringBuilder;
+        this.category = category;
         stringBuilder = new StringBuilder();
         String tempCat = pref.getString(category, "none");
         if(tempCat != null)
@@ -117,7 +161,8 @@ public class MainActivity extends AppCompatActivity implements iNavItemSelectedL
         {
             ListItem item = new ListItem();
             item.setText(array[i]);
-            item.setFavorite(false);
+            item.setCat(category);
+            item.setPosition(i);
             list.add(item);
         }
 

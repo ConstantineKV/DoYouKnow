@@ -1,6 +1,7 @@
 package com.konstantin_romashenko.doyouknow.adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,18 +20,20 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.DataHolder>
     private Context context;
     private RecOnClickListener recOnClickListener;
     private List<ListItem> listItemArray;
-
+    private SharedPreferences pref;
     public DataAdapter(Context context, RecOnClickListener recOnClickListener, List<ListItem> listItemArray)
     {
         this.context = context;
         this.recOnClickListener = recOnClickListener;
         this.listItemArray = listItemArray;
+        pref = context.getSharedPreferences("CAT",Context.MODE_PRIVATE);
     }
 
     @Override
     public DataHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_layout,parent,false);
+
         return new DataHolder(view);
     }
 
@@ -59,11 +62,13 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.DataHolder>
             imButFav = itemView.findViewById(R.id.ibBut);
             imButFav.setOnClickListener(this);
 
+
         }
 
         public void setData(ListItem item)
         {
             tvText.setText(item.getText());
+            setFav(item, getAdapterPosition());
         }
 
         @Override
@@ -79,6 +84,29 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.DataHolder>
                 imButFav.setImageResource(android.R.drawable.btn_star_big_off);
             }
             recOnClickListener.onItemClicked(getAdapterPosition());
+
+        }
+
+        private void setFav(ListItem item, int position)
+        {
+            String fav_data = pref.getString(item.getCat(), "none");
+            if(fav_data != null && fav_data != "none")
+            {
+                char[] charArray = fav_data.toCharArray();
+                switch(charArray[item.getPosition()])
+                {
+                    case '0':
+                        imButFav.setImageResource(android.R.drawable.btn_star_big_off);
+                        isFavChecked = false;
+                        break;
+                    case '1':
+                        imButFav.setImageResource(android.R.drawable.btn_star_big_on);
+                        isFavChecked = true;
+                        break;
+                }
+            }
+
+
         }
     }
 

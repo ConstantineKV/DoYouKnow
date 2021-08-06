@@ -3,8 +3,8 @@ package com.konstantin_romashenko.doyouknow.adapter;
 public class ListItem
 {
     private String text;
-    private boolean favorite;
     private String cat;
+    private int position;
 
     public String getCat()
     {
@@ -16,15 +16,17 @@ public class ListItem
         this.cat = cat;
     }
 
-
     public String getText()
     {
         return text;
     }
 
-    public boolean isFavorite()
-    {
-        return favorite;
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
     }
 
     public void setText(String text)
@@ -32,8 +34,5 @@ public class ListItem
         this.text = text;
     }
 
-    public void setFavorite(boolean favorite)
-    {
-        this.favorite = favorite;
-    }
+
 }
